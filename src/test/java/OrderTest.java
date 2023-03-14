@@ -14,6 +14,7 @@ import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.startsWith;
 @RunWith(Parameterized.class)
 public class OrderTest {
+    private final String twoButton;
     private final String name;
     private final String surname;
     private final String address;
@@ -23,7 +24,8 @@ public class OrderTest {
     private final int period;
     private final String comment;
     private final WebDriver driver;
-    public OrderTest(String name, String surname, String address, String metroStation, String phone, String date, int period, String comment) {
+    public OrderTest(String twoButton,String name, String surname, String address, String metroStation, String phone, String date, int period, String comment) {
+        this.twoButton = twoButton;
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -34,14 +36,12 @@ public class OrderTest {
         this.comment = comment;
         this.driver = new ChromeDriver();
     }
-    @Parameterized.Parameters(name = "{index}: имя: {0}, фамилия: {1}, адрес: {2}, метро: {3},  " +
-            "телефон: {4}, дата: {5}, период: {6}, комметарий: {7}")
+    @Parameterized.Parameters
     public static Object[][] getAnswers() {
         return new Object[][]{
-                {"Иван", "Рудоров", "г. Москва, ул.Ленина, 4", "Сокольники", "+79109108899",
+                {"Button_Button__ra12g","Иван", "Рудоров", "г. Москва, ул.Ленина, 4", "Сокольники", "+79109108899",
                         "09/12/2023", 1, " "},
-                {"Андр", "Оооо", "Обнинск, Белкинская", "Черкизовская", "89159151122", "02/08/2023", 3, "Комментарий1"},
-                {"ммм", "кузнецов", "Москва", "Чистые пруды", "89109102211", "31/11/2025", 2, "Комментарий2"}
+                {"Button_Button__ra12g Button_Middle__1CSJM","Андр", "Оооо", "Обнинск, Белкинская", "Черкизовская", "89159151122", "02/08/2023", 3, "Комментарий1"},
         };
     }
 
@@ -51,7 +51,7 @@ public class OrderTest {
         HomePage objHomePage = new HomePage(driver);
         objHomePage.closeCookie();
         objHomePage.scrollToPanelHowItWorks();
-        objHomePage.clickOrderButtonBig();
+        objHomePage.clickButtonOrder(twoButton);
         FirstOrderPage objFirstOrderPage = new FirstOrderPage(driver);
         objFirstOrderPage.waitForLoadHeaderForm();
         objFirstOrderPage.fillingOrder(name, surname, address, metroStation, phone);
