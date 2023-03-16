@@ -32,12 +32,4 @@ public void clickButtonOrder(String text){
     ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",driver.findElement(By.xpath(".//button[@class='"+text+"']")));
             driver.findElement(By.xpath(".//button[@class='"+text+"']")).click();
 }
-
-    public void clickOrderButtonSmall() {
-        driver.findElement(btnToOrderSmall).click();
-    }
-
-    public void clickOrderButtonBig() {
-        driver.findElement(btnToOrderBig).click();
-    }
 }
